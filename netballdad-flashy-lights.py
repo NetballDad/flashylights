@@ -8,6 +8,12 @@ from dotstar import Adafruit_DotStar
 datapin = 10
 clockpin = 12
 
+numpixels = 120 #which is the therotical max of the Netball ring lights.
+
+#configure the strip
+
+strip = Adafruit_DotStar(numpixels, 6000000, order='gbr')
+
 # red, blue, green
 colourArray = [["red", 255, 0, 0],
                ["orange", 255, 0, 128],
@@ -231,10 +237,6 @@ numpixels = getNumpixels()  # Number of LEDs in strip
 strip.begin()  # Initialize pins for output
 strip.setBrightness(50)  # Limit brightness to ~1/4 duty cycle
 strip.clear()
-
-#configure the strip
-
-strip = Adafruit_DotStar(numpixels, 6000000, order='gbr')
 
 ##################################################################
 # start playing with the flashy lights now - below here.
