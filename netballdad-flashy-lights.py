@@ -8,18 +8,6 @@ from dotstar import Adafruit_DotStar
 datapin = 10
 clockpin = 12
 
-#work out how many pixels there is
-numpixels = getNumpixels()  # Number of LEDs in strip
-
-# initate the strip
-strip.begin()  # Initialize pins for output
-strip.setBrightness(50)  # Limit brightness to ~1/4 duty cycle
-strip.clear()
-
-#configure the strip
-
-strip = Adafruit_DotStar(numpixels, 6000000, order='gbr')
-
 # red, blue, green
 colourArray = [["red", 255, 0, 0],
                ["orange", 255, 0, 128],
@@ -252,6 +240,18 @@ while True:
     strip.show()
     time.sleep(10)
 
+
+#work out how many pixels there is
+numpixels = getNumpixels()  # Number of LEDs in strip
+
+# initate the strip
+strip.begin()  # Initialize pins for output
+strip.setBrightness(50)  # Limit brightness to ~1/4 duty cycle
+strip.clear()
+
+#configure the strip
+
+strip = Adafruit_DotStar(numpixels, 6000000, order='gbr')
 
 # setInbetween(5)
 # chasePixels(120, -10, -20, getColour("orange"), getColour("light blue"))
