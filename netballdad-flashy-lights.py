@@ -223,8 +223,22 @@ def setInbetween(wait):
     print("about to wait")
     time.sleep(wait)
 
-# start playing with the flashy lights now.
 
+#work out how many pixels there is
+numpixels = getNumpixels()  # Number of LEDs in strip
+
+# initate the strip
+strip.begin()  # Initialize pins for output
+strip.setBrightness(50)  # Limit brightness to ~1/4 duty cycle
+strip.clear()
+
+#configure the strip
+
+strip = Adafruit_DotStar(numpixels, 6000000, order='gbr')
+
+##################################################################
+# start playing with the flashy lights now - below here.
+##################################################################
 
 # print("rainbow")
 rainbow()
@@ -239,19 +253,6 @@ while True:
     strip.clear()
     strip.show()
     time.sleep(10)
-
-
-#work out how many pixels there is
-numpixels = getNumpixels()  # Number of LEDs in strip
-
-# initate the strip
-strip.begin()  # Initialize pins for output
-strip.setBrightness(50)  # Limit brightness to ~1/4 duty cycle
-strip.clear()
-
-#configure the strip
-
-strip = Adafruit_DotStar(numpixels, 6000000, order='gbr')
 
 # setInbetween(5)
 # chasePixels(120, -10, -20, getColour("orange"), getColour("light blue"))
