@@ -8,7 +8,7 @@ from dotstar import Adafruit_DotStar
 datapin = 10
 clockpin = 12
 
-numpixels = 120 #which is the therotical max of the Netball ring lights.
+numpixels = 60 #which is the therotical max of the Netball ring lights.
 
 #configure the strip
 
@@ -44,20 +44,20 @@ def getColour(colour):
         if colourArray[c][0] == colour:
             return colourArray[c]
 
-def rainbow():
+def rainbow(timeBetweenColours):
     for c in range(len(colourArray)):
 
         strip.clear()
         strip.show()
-        time.sleep(0.5)
+        time.sleep(timeBetweenColours)
         print(colourArray[c][0])
         for n in range(numpixels):
             strip.setPixelColor(n, colourArray[c][1], colourArray[c][2], colourArray[c][3])
-            print("about to show next pixel " + str(n))
+            #print("about to show next pixel " + str(n))
             strip.show()
-            time.sleep(0.15)
+            time.sleep(0.1)
 
-        time.sleep(1.0)
+        time.sleep(timeBetweenColours)
         print("about to flash ")
         flashLights(0.5)
 
@@ -77,7 +77,7 @@ def ticktock(size, loops, colourA, colourB):
                 colourstart += 1
             # print ("colour1start  " + str(colour1start)
             colourstart += size
-            if colourstart >= 30:
+            if colourstart >= numpixels:
                 colourstart = 0
                 break
         strip.show()
@@ -95,7 +95,7 @@ def ticktock(size, loops, colourA, colourB):
                 colourstart += 1
                 # print ("colour1start 2nd loop" + str(colour1start))
 
-                if colourstart >= 30:
+                if colourstart >= numpixels:
                     break
         strip.show()
         time.sleep(0.5)
@@ -136,7 +136,7 @@ def chaseRandomPixels(loops, tail, colourA, colourB):
             strip.show()
             time.sleep(0.2)
 
-        if chaser > 30:
+        if chaser > numpixels:
             break
 
 
@@ -146,7 +146,7 @@ def setRandomPixels():
     strip.clear()
 
     # now randomise them with other colours
-    for r in random.sample(xrange(30), random.randrange(0, 30)):
+    for r in random.sample(xrange(numpixels), random.randrange(0, numpixels)):
         strip.setPixelColor(r, random.randrange(0, 175), random.randrange(0, 175), random.randrange(0, 175))
         print("random pixel set " + str(r))
         strip.show()
@@ -166,10 +166,11 @@ def splitPixels(l, colour):
         setAllPixels(colour)
         strip.show()
 
-        midLeft = 14
-        midRight = 15
+	mid = numpixels/2
+        midLeft = mid -1
+        midRight = mid
 
-        for p in range(15):
+        for p in range(mid):
             strip.setPixelColor(midLeft, 0, 0, 0)
             strip.setPixelColor(midRight, 0, 0, 0)
             midLeft -= 1
@@ -230,9 +231,6 @@ def setInbetween(wait):
     time.sleep(wait)
 
 
-#work out how many pixels there is
-numpixels = getNumpixels()  # Number of LEDs in strip
-
 # initate the strip
 strip.begin()  # Initialize pins for output
 strip.setBrightness(50)  # Limit brightness to ~1/4 duty cycle
@@ -243,71 +241,45 @@ strip.clear()
 ##################################################################
 
 # print("rainbow")
-rainbow()
+rainbow(0.5)
 # setAllPixels(getColour("orange"))
-print("testing battery life")
 
-while True:
-    strip.clear()
-    time.sleep(1)
-    setAllPixels(getColour("red"))
-    flashLights(0.5)
-    strip.clear()
-    strip.show()
-    time.sleep(10)
 
-# setInbetween(5)
-# chasePixels(120, -10, -20, getColour("orange"), getColour("light blue"))
+#print("testing battery life")
+#while True:
+#    strip.clear()
+#    time.sleep(1)
+#    setAllPixels(getColour("red"))
+#    flashLights(0.5)
+#    strip.clear()
+#    strip.show()
+#    time.sleep(10)
 
-# print("ticktock blue - red")
-# ticktock red and blue 3 pixels, 5 loops
-# ticktock(3, 5, getColour("red"), getColour("blue"))
+setInbetween(5)
+chasePixels(120, -10, -20, getColour("orange"), getColour("light blue"))
+
+print("ticktock blue - red")
+#ticktock red and blue 3 pixels, 5 loops
+ticktock(3, 5, getColour("red"), getColour("blue"))
 
 # setInbetween(5)
 # ticktock(5, 5, getColour("red"), getColour("blue"))
 
 # setInbetween(10)
-# print("split pixels - red")
+print("split pixels - red")
 # Red
-# splitPixels(2, getColour("red"))
+splitPixels(2, getColour("red"))
 
-# setInbetween(10)
-# blue
-# print("split pixels - blue")
-# splitPixels(2, getColour("blue"))
-
-# print(" transition -chasePixels - red - green")
-# setInbetween(10)
-# chasePixels(120, -5, -10, getColour("red"), getColour("green"))
-
-# setInbetween(10)
-# blue
-# print("should be blue")
-# setAllPixels(getColour("blue"))
-# print("now flash")
-# flashLights(0.2)
-
-# setInbetween(10)
-
-# red
-# print("all red")
-# setAllPixels(getColour("red"))
-# print("flash")
-# flashLights(0.2)
-
-
-# setAllPixels(getColour("acqua"))
-# flashLights(0.1)
-# setAllPixels(getColour("purple"))
-# flashLights(0.1)
-# setAllPixels(getColour("pink"))
-# flashLights(0.1)
-# setAllPixels(getColour("blue"))
-# flashLights(0.1)
+print(" transition -chasePixels - red - green")
+setInbetween(5)
+chasePixels(120, -5, -10, getColour("red"), getColour("green"))
 
 # set it to standby
-# setInbetween(10)
-# print("chasePixels red and blue")
+setInbetween(5)
+print("chasePixels red and blue")
 # chase random pixles, with tail (Red 175, 0, 0) and blue (0,175,0)
-# chaseRandomPixels(5, 1, getColour("red"), getColour("blue"))
+chaseRandomPixels(5, 1, getColour("red"), getColour("blue"))
 
+setInbetween(5)
+print("about to do random")
+setRandomPixels()
