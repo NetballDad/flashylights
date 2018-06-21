@@ -245,16 +245,16 @@ strip.clear()
 lights = random.randint(0, 6)
 
 if lights == 1:
-    splitPixels(getColour("blue"), getColour("white"))
+    splitPixels(getColour("blue"), getColour("red"))
 elif lights == 2:
-    ticktock(3, 5, getColour("blue"), getColour("white"))
+    ticktock(3, 5, getColour("blue"), getColour("red"))
 elif lights == 3:
-    chasePixels(120, -5, -10, getColour("white"), getColour("blue"))
+    chasePixels(120, -5, -10, getColour("red"), getColour("blue"))
 elif lights == 4:
-    chaseRandomPixels(5, 1, getColour("White"), getColour("blue"))
+    chaseRandomPixels(5, 1, getColour("red"), getColour("blue"))
 elif lights == 5:
     setAllPixels(getColour("blue"))
     flashLights(0.5)
 elif lights == 6:
-    setAllPixels(getColour("white"))
+    setAllPixels(getColour("red"))
     flashLights(0.5)
