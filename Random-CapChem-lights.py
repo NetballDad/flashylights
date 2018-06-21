@@ -26,7 +26,7 @@ colourArray = [["red", 255, 0, 0],
                ["blue", 0, 255, 0],
                ["purple", 128, 255, 0],
                ["light purple", 255, 255, 0],
-               ["white", 1, 1, 1],
+               ["white", 255, 255,255],
                ["pink", 255, 128, 0]]
 
 
@@ -251,7 +251,7 @@ if lights == 0:
 elif lights == 1:
     ticktock(3, 5, getColour("blue"), getColour("red"))
 elif lights == 2:
-    chasePixels(120, -5, -10, getColour("red"), getColour("blue"))
+    chasePixels(30, -5, -10, getColour("red"), getColour("blue"))
 elif lights == 3:
     chaseRandomPixels(5, 1, getColour("red"), getColour("blue"))
 elif lights == 4:
