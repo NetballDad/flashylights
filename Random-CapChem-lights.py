@@ -240,19 +240,19 @@ strip.clear()
 # start playing with the flashy lights now - below here.
 ##################################################################
 
-lights = random.randint(0, 5)
+lights = random.randint(0, 6)
 
-if lights == 1: splitPixels(getColour("blue"))
-    pass
-elif lights == 2: ticktock(3, 5, getColour("blue"), getColour("white"))
-    pass
-elif lights == 3: chasePixels(120, -5, -10, getColour("white"), getColour("blue"))
-    pass
-elif lights == 4:chaseRandomPixels(5, 1, getColour("White"), getColour("blue"))
-    pass
-elif lights == 5: setAllPixels("blue")
+if lights == 1:
+    splitPixels(getColour("blue"))
+elif lights == 2:
+    ticktock(3, 5, getColour("blue"), getColour("white"))
+elif lights == 3:
+    chasePixels(120, -5, -10, getColour("white"), getColour("blue"))
+elif lights == 4:
+    chaseRandomPixels(5, 1, getColour("White"), getColour("blue"))
+elif lights == 5:
+    setAllPixels("blue")
     flashLights(0.5)
-    pass
-elif lights == 6: setAllPixels("white")
+elif lights == 6:
+    setAllPixels("white")
     flashLights(0.5)
-    pass
