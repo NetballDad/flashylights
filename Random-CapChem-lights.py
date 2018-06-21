@@ -244,18 +244,20 @@ strip.clear()
 
 lights = random.randint(0, 6)
 
-if lights == 1:
+print("lights is " + str(lights))
+
+if lights == 0:
     splitPixels(getColour("blue"), getColour("red"))
-elif lights == 2:
+elif lights == 1:
     ticktock(3, 5, getColour("blue"), getColour("red"))
-elif lights == 3:
+elif lights == 2:
     chasePixels(120, -5, -10, getColour("red"), getColour("blue"))
-elif lights == 4:
+elif lights == 3:
     chaseRandomPixels(5, 1, getColour("red"), getColour("blue"))
-elif lights == 5:
+elif lights == 4:
     setAllPixels(getColour("blue"))
     flashLights(0.5)
-elif lights == 6:
+elif lights == 5:
     setAllPixels(getColour("red"))
     flashLights(0.5)
 
