@@ -242,7 +242,7 @@ strip.clear()
 # start playing with the flashy lights now - below here.
 ##################################################################
 
-lights = random.randint(0, 6)
+lights = random.randint(0, 5)
 
 print("lights is " + str(lights))
 
