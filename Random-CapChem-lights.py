@@ -245,7 +245,7 @@ strip.clear()
 lights = random.randint(0, 6)
 
 if lights == 1:
-    splitPixels(getColour("blue"))
+    splitPixels(getColour("blue"), getColour("white"))
 elif lights == 2:
     ticktock(3, 5, getColour("blue"), getColour("white"))
 elif lights == 3:
