@@ -247,18 +247,18 @@ lights = random.randint(0, 5)
 print("lights is " + str(lights))
 
 if lights == 0:
-    splitPixels(3, getColour("red"))
+    splitPixels(3, getColour("green"))
 elif lights == 1:
-    ticktock(3, 5, getColour("blue"), getColour("red"))
+    ticktock(3, 5, getColour("blue"), getColour("green"))
 elif lights == 2:
-    chasePixels(30, -5, -10, getColour("red"), getColour("blue"))
+    chasePixels(30, -5, -10, getColour("green"), getColour("blue"))
 elif lights == 3:
-    chaseRandomPixels(5, 1, getColour("red"), getColour("blue"))
+    chaseRandomPixels(5, 1, getColour("green"), getColour("blue"))
 elif lights == 4:
     setAllPixels(getColour("blue"))
     flashLights(0.5)
 elif lights == 5:
-    setAllPixels(getColour("red"))
+    setAllPixels(getColour("green"))
     flashLights(0.5)
 
 strip.clear()
