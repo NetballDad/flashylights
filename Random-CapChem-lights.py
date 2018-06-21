@@ -244,15 +244,15 @@ lights = random.randint(0, 5)
 
 if lights == 1: splitPixels(getColour("blue"))
     pass
-elseif lights == 2: ticktock(3, 5, getColour("blue"), getColour("white"))
+elif lights == 2: ticktock(3, 5, getColour("blue"), getColour("white"))
     pass
-elseif lights == 3: chasePixels(120, -5, -10, getColour("white"), getColour("blue"))
+elif lights == 3: chasePixels(120, -5, -10, getColour("white"), getColour("blue"))
     pass
-elseif lights == 4:chaseRandomPixels(5, 1, getColour("White"), getColour("blue"))
+elif lights == 4:chaseRandomPixels(5, 1, getColour("White"), getColour("blue"))
     pass
-elseif lights == 5: setAllPixels("blue")
-        flashLights(0.5)
-        pass
-elseif lights == 6: setAllPixels("white")
-        flashLights(0.5)
-        pass
+elif lights == 5: setAllPixels("blue")
+    flashLights(0.5)
+    pass
+elif lights == 6: setAllPixels("white")
+    flashLights(0.5)
+    pass
