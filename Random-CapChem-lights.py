@@ -258,3 +258,6 @@ elif lights == 5:
 elif lights == 6:
     setAllPixels(getColour("red"))
     flashLights(0.5)
+
+strip.clear()
+strip.show()
