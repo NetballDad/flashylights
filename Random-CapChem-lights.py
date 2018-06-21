@@ -247,7 +247,7 @@ lights = random.randint(0, 6)
 print("lights is " + str(lights))
 
 if lights == 0:
-    splitPixels(getColour("blue"), getColour("red"))
+    splitPixels(3, getColour("red"))
 elif lights == 1:
     ticktock(3, 5, getColour("blue"), getColour("red"))
 elif lights == 2:
