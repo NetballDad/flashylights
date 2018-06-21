@@ -26,7 +26,9 @@ colourArray = [["red", 255, 0, 0],
                ["blue", 0, 255, 0],
                ["purple", 128, 255, 0],
                ["light purple", 255, 255, 0],
+               ["white", 1, 1, 1],
                ["pink", 255, 128, 0]]
+
 
 
 def getNumpixels():
