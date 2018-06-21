@@ -251,8 +251,8 @@ elif lights == 3:
 elif lights == 4:
     chaseRandomPixels(5, 1, getColour("White"), getColour("blue"))
 elif lights == 5:
-    setAllPixels("blue")
+    setAllPixels(getColour("blue"))
     flashLights(0.5)
 elif lights == 6:
-    setAllPixels("white")
+    setAllPixels(getColour("white"))
     flashLights(0.5)
