@@ -245,8 +245,8 @@ strip.clear()
 
 
 #grab the colours from the command line arguments
-colourOne = str(sys.argv[0])
-colourTwo = str(sys.argv[1])
+colourOne = str(sys.argv[1]) #interesting arg 0 is the file name!!
+colourTwo = str(sys.argv[2])
 
 lights = random.randint(0, 10)
 
