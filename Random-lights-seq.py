@@ -43,7 +43,7 @@ def getNumpixels():
 
 def getColour(colour):
     for c in range(len(colourArray)):
-        print(" colour we are looking for is " + colour)
+        #print(" colour we are looking for is " + colour)
         if colourArray[c][0] == colour:
             return colourArray[c]
 
@@ -267,7 +267,7 @@ elif lights == 5:
 elif lights == 6:
     chasePixels(100, -5, -10, getColour(colourOne), getColour(colourTwo))
 elif lights == 7:
-    chasePixels(30, -5, -10, getColour(colourTwo), getColour(colourOne))
+    chasePixels(100, -5, -10, getColour(colourTwo), getColour(colourOne))
 elif lights == 8:
     chaseRandomPixels(5, 1, getColour(colourOne), getColour(colourTwo))
 elif lights == 9:
