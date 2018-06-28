@@ -43,6 +43,7 @@ def getNumpixels():
 
 def getColour(colour):
     for c in range(len(colourArray)):
+        print(" colour we are looking for is " + colour)
         if colourArray[c][0] == colour:
             return colourArray[c]
 
@@ -247,9 +248,10 @@ strip.clear()
 colourOne = str(sys.argv[0])
 colourTwo = str(sys.argv[1])
 
-lights = random.randint(0, 9)
+lights = random.randint(0, 10)
 
 print("lights is " + str(lights))
+print(colourOne)
 
 if lights == 0:
     splitPixels(3, getColour(colourOne))
