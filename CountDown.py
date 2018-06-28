@@ -250,7 +250,7 @@ counter = 0
 
 setAllPixels(getColour(colourOne))
 
-while True:
+for p in range(period):
     time.sleep(1.0)
     counter += 1
     if counter == (period - countDown):
