@@ -249,11 +249,14 @@ countDown = int(sys.argv[4])
 counter = 0
 
 setAllPixels(getColour(colourOne))
+
 while True:
     time.sleep(1.0)
     counter += 1
     if counter == (period - countDown):
+        print("counter is " + str(counter))
         break;
+
     Colourswitch = 0
 
     for cd in range (countDown):
