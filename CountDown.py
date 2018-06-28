@@ -260,7 +260,7 @@ for p in range(period):
 
 Colourswitch = 0
 
-for cd in range (countDown):
+for cd in range(countDown):
     if Colourswitch == 0:
         setAllPixels(getColour(colourTwo))
         Colourswitch += 1
@@ -270,6 +270,9 @@ for cd in range (countDown):
 
     strip.show()
     time.sleep(1)
+
+    if cd = (countDown - 1):
+        flashLights(0.2)
 
 strip.clear()
 strip.show()
