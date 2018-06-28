@@ -253,6 +253,7 @@ setAllPixels(getColour(colourOne))
 for p in range(period):
     time.sleep(1.0)
     counter += 1
+    print("counter is " + counter)
     if counter == (period - countDown):
         print("counter is " + str(counter))
         break;
