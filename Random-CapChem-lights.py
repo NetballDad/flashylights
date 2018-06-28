@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-import time, random
+import time, random, sys
 from dotstar import Adafruit_DotStar
 
 # Here's how to control the strip from any two GPIO pins:
@@ -242,24 +242,37 @@ strip.clear()
 # start playing with the flashy lights now - below here.
 ##################################################################
 
-lights = random.randint(0, 5)
+
+#grab the colours from the command line arguments
+colourOne = str(sys.argv[0])
+colourTwo = str(sys.argv[1])
+
+lights = random.randint(0, 9)
 
 print("lights is " + str(lights))
 
 if lights == 0:
-    splitPixels(3, getColour("green"))
+    splitPixels(3, getColour(colourOne)
 elif lights == 1:
-    ticktock(3, 5, getColour("blue"), getColour("green"))
+    splitPixels(3, getColour(colourTwo)
 elif lights == 2:
-    chasePixels(30, -5, -10, getColour("green"), getColour("blue"))
+    ticktock(3, 5, getColour(colourOne), getColour(colourTwo)
 elif lights == 3:
-    chaseRandomPixels(5, 1, getColour("green"), getColour("blue"))
+    ticktock(3, 5, getColour(colourOne), getColour(colourTwo)
 elif lights == 4:
-    setAllPixels(getColour("blue"))
+    setAllPixels(getColour(colourOne))
     flashLights(0.5)
 elif lights == 5:
-    setAllPixels(getColour("green"))
+    setAllPixels(getColour(colourTwo))
     flashLights(0.5)
+elif lights == 6:
+    chasePixels(30, -5, -10, getColour(colourOne), getColour(colourTwo))
+elif lights == 6:
+    chasePixels(30, -5, -10, getColour(colourTwo), getColour(colourOne))
+elif lights == 8:
+    chaseRandomPixels(5, 1, getColour(colourOne), getColour(colourTwo))
+elif lights == 9:
+    chaseRandomPixels(5, 1, getColour(colourTwo), getColour(colourOne))
 
 strip.clear()
 strip.show()
