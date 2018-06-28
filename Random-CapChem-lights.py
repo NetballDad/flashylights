@@ -56,13 +56,9 @@ def rainbow(timeBetweenColours, coloursInRainbow):
         print(colourArray[c][0])
         for n in range(numpixels):
             strip.setPixelColor(n, colourArray[c][1], colourArray[c][2], colourArray[c][3])
-            #print("about to show next pixel " + str(n))
-            strip.show()
-            time.sleep(0.1)
-
+            #no need to sleep
+        strip.show()
         time.sleep(timeBetweenColours)
-        print("about to flash ")
-        flashLights(0.5)
 
 
 def ticktock(size, loops, colourA, colourB):
@@ -245,22 +241,23 @@ strip.clear()
 
 
 #grab the colours from the command line arguments
-colourOne = str(sys.argv[1]) #interesting arg 0 is the file name!!
+#interesting arg 0 is the file name!!
+colourOne = str(sys.argv[1])
 colourTwo = str(sys.argv[2])
 
 lights = random.randint(0, 10)
 
 print("lights is " + str(lights))
-print(colourOne)
+# print(colourOne)
 
 if lights == 0:
     splitPixels(3, getColour(colourOne))
 elif lights == 1:
     splitPixels(3, getColour(colourTwo))
 elif lights == 2:
-    ticktock(3, 5, getColour(colourOne), getColour(colourTwo))
+    ticktock(5, 5, getColour(colourOne), getColour(colourTwo))
 elif lights == 3:
-    ticktock(3, 5, getColour(colourOne), getColour(colourTwo))
+    ticktock(10, 5, getColour(colourOne), getColour(colourTwo))
 elif lights == 4:
     setAllPixels(getColour(colourOne))
     flashLights(0.5)
@@ -268,7 +265,7 @@ elif lights == 5:
     setAllPixels(getColour(colourTwo))
     flashLights(0.5)
 elif lights == 6:
-    chasePixels(30, -5, -10, getColour(colourOne), getColour(colourTwo))
+    chasePixels(100, -5, -10, getColour(colourOne), getColour(colourTwo))
 elif lights == 7:
     chasePixels(30, -5, -10, getColour(colourTwo), getColour(colourOne))
 elif lights == 8:
@@ -276,7 +273,7 @@ elif lights == 8:
 elif lights == 9:
     chaseRandomPixels(5, 1, getColour(colourTwo), getColour(colourOne))
 elif lights ==10:
-    rainbow(0.5, 5)
+    rainbow(0.5, 10)
 
 strip.clear()
 strip.show()
