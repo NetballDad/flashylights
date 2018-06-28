@@ -252,13 +252,13 @@ lights = random.randint(0, 9)
 print("lights is " + str(lights))
 
 if lights == 0:
-    splitPixels(3, getColour(colourOne)
+    splitPixels(3, getColour(colourOne))
 elif lights == 1:
-    splitPixels(3, getColour(colourTwo)
+    splitPixels(3, getColour(colourTwo))
 elif lights == 2:
-    ticktock(3, 5, getColour(colourOne), getColour(colourTwo)
+    ticktock(3, 5, getColour(colourOne), getColour(colourTwo))
 elif lights == 3:
-    ticktock(3, 5, getColour(colourOne), getColour(colourTwo)
+    ticktock(3, 5, getColour(colourOne), getColour(colourTwo))
 elif lights == 4:
     setAllPixels(getColour(colourOne))
     flashLights(0.5)
