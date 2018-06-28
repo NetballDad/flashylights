@@ -244,15 +244,15 @@ strip.clear()
 #interesting arg 0 is the file name!!
 colourOne = str(sys.argv[1])
 colourTwo = str(sys.argv[2])
-period = str(sys.argv[3])
-countDown = str(sys.argv[4])
+period = int(sys.argv[3])
+countDown = int(sys.argv[4])
 counter = 0
 
 setAllPixels(getColour(colourOne))
 while True:
     time.sleep(1.0)
     counter += 1
-    if counter == period - countDown:
+    if counter == (period - countDown):
         break;
     Colourswitch = 0
 
