@@ -26,7 +26,7 @@ colourArray = [["red", 255, 0, 0],
                ["blue", 0, 255, 0],
                ["purple", 128, 255, 0],
                ["light purple", 255, 255, 0],
-               ["white", 255, 255,255],
+               ["white", 255, 255, 255],
                ["pink", 255, 128, 0]]
 
 
@@ -46,8 +46,8 @@ def getColour(colour):
         if colourArray[c][0] == colour:
             return colourArray[c]
 
-def rainbow(timeBetweenColours):
-    for c in range(len(colourArray)):
+def rainbow(timeBetweenColours, coloursInRainbow):
+    for c in range(coloursInRainbow):
 
         strip.clear()
         strip.show()
@@ -108,9 +108,9 @@ def ticktock(size, loops, colourA, colourB):
 def chaseRandomPixels(loops, tail, colourA, colourB):
     strip.clear()
     strip.setBrightness(125)
-    start = random.randint(3, 10)
+    start = random.randint(5, 10)
     print ("starting at" + str(start))
-    chaser = random.randint(0, 3)
+    chaser = random.randint(0, 5)
     print ("chaser is " + str(chaser))
     # start is always between 5 and 10 pixels in.
     # chaser starts at between 0 and 5
@@ -130,7 +130,7 @@ def chaseRandomPixels(loops, tail, colourA, colourB):
                 strip.show()
 
         # now start the chaser at zero, with a max of 5 pixels
-        for c in range(3):
+        for c in range(5):
             strip.setPixelColor(chaser, colourB[1], colourB[2], colourB[3])
             # increament by 1
             print ("Chaser was " + str(chaser))
@@ -267,12 +267,14 @@ elif lights == 5:
     flashLights(0.5)
 elif lights == 6:
     chasePixels(30, -5, -10, getColour(colourOne), getColour(colourTwo))
-elif lights == 6:
+elif lights == 7:
     chasePixels(30, -5, -10, getColour(colourTwo), getColour(colourOne))
 elif lights == 8:
     chaseRandomPixels(5, 1, getColour(colourOne), getColour(colourTwo))
 elif lights == 9:
     chaseRandomPixels(5, 1, getColour(colourTwo), getColour(colourOne))
+elif lights ==10:
+    rainbow(0.5, 5)
 
 strip.clear()
 strip.show()
