@@ -258,18 +258,18 @@ for p in range(period):
         print("counter is " + str(counter))
         break;
 
-    Colourswitch = 0
+Colourswitch = 0
 
-    for cd in range (countDown):
-        if Colourswitch == 0:
-            setAllPixels(getColour(colourTwo))
-            Colourswitch += 1
-        elif Colourswitch == 1:
-            setAllPixels(getColour(colourOne))
-            Colourswitch = 0
+for cd in range (countDown):
+    if Colourswitch == 0:
+        setAllPixels(getColour(colourTwo))
+        Colourswitch += 1
+    elif Colourswitch == 1:
+        setAllPixels(getColour(colourOne))
+        Colourswitch = 0
 
-        strip.show()
-        time.sleep(1)
+    strip.show()
+    time.sleep(1)
 
 strip.clear()
 strip.show()
