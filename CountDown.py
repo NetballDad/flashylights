@@ -255,7 +255,7 @@ for p in range(period):
     counter += 1
     print("counter is " + str(counter))
     if counter == (period - countDown):
-        print("counter is " + str(counter))
+        #print("counter is " + str(counter))
         break;
 
 Colourswitch = 0
@@ -273,7 +273,7 @@ for cd in range(countDown):
     strip.show()
     time.sleep(1)
 
-    if flash == (countDown - 1):
+    if flash >= (countDown - 1):
         flashLights(0.2)
 
 strip.clear()
