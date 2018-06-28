@@ -273,7 +273,7 @@ for cd in range(countDown):
     strip.show()
     time.sleep(1)
 
-    if flash = (countDown - 1):
+    if flash == (countDown - 1):
         flashLights(0.2)
 
 strip.clear()
