@@ -245,7 +245,7 @@ strip.clear()
 colourOne = str(sys.argv[1])
 colourTwo = str(sys.argv[2])
 
-lights = random.randint(0, 10)
+lights = random.randint(0, 8)
 
 print("lights is " + str(lights))
 # print(colourOne)
@@ -259,20 +259,14 @@ elif lights == 2:
 elif lights == 3:
     ticktock(10, 5, getColour(colourOne), getColour(colourTwo))
 elif lights == 4:
-    setAllPixels(getColour(colourOne))
-    flashLights(0.5)
-elif lights == 5:
-    setAllPixels(getColour(colourTwo))
-    flashLights(0.5)
-elif lights == 6:
     chasePixels(100, -5, -10, getColour(colourOne), getColour(colourTwo))
-elif lights == 7:
+elif lights == 5:
     chasePixels(100, -5, -10, getColour(colourTwo), getColour(colourOne))
-elif lights == 8:
+elif lights == 6:
     chaseRandomPixels(5, 1, getColour(colourOne), getColour(colourTwo))
-elif lights == 9:
+elif lights == 7:
     chaseRandomPixels(5, 1, getColour(colourTwo), getColour(colourOne))
-elif lights ==10:
+elif lights ==8:
     rainbow(0.5, 10)
 
 strip.clear()
