@@ -213,7 +213,7 @@ def chasePixels(loops, mid, tail, colourA, colourB):
             tail = 0
 
         strip.show()
-        time.sleep(1.0 / 50)
+        time.sleep(0.25)
         # end of the chasePixels
 
 
