@@ -245,7 +245,7 @@ strip.clear()
 colourOne = str(sys.argv[1])
 colourTwo = str(sys.argv[2])
 
-lights = random.randint(0, 8)
+lights = random.randint(0, 4)
 
 print("lights is " + str(lights))
 # print(colourOne)
@@ -267,7 +267,7 @@ elif lights == 6:
 elif lights == 7:
     chaseRandomPixels(5, 1, getColour(colourTwo), getColour(colourOne))
 elif lights ==8:
-    rainbow(0.5, 10)
+    rainbow(0.2, 10)
 
 strip.clear()
 strip.show()
