@@ -133,7 +133,7 @@ def chaseRandomPixels(loops, tail, colourA, colourB):
             print ("Chaser was " + str(chaser))
             chaser += 1
             strip.show()
-            time.sleep(0.2)
+            time.sleep(0.1)
 
         if chaser > numpixels:
             break
