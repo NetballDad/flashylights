@@ -271,7 +271,7 @@ for cd in range(countDown):
         Colourswitch = 0
 
     strip.show()
-    print()
+    print("flash is " + str(flash))
     time.sleep(1)
 
     if flash >= (countDown - 1):
