@@ -133,7 +133,7 @@ def chaseRandomPixels(loops, tail, colourA, colourB):
             print ("Chaser was " + str(chaser))
             chaser += 1
             strip.show()
-            time.sleep(0.2)
+            time.sleep(0.1)
 
         if chaser > numpixels:
             break
@@ -213,7 +213,7 @@ def chasePixels(loops, mid, tail, colourA, colourB):
             tail = 0
 
         strip.show()
-        time.sleep(1.0 / 50)
+        time.sleep(0.25)
         # end of the chasePixels
 
 
@@ -245,7 +245,7 @@ strip.clear()
 colourOne = str(sys.argv[1])
 colourTwo = str(sys.argv[2])
 
-lights = random.randint(0, 10)
+lights = random.randint(0, 4)
 
 print("lights is " + str(lights))
 # print(colourOne)
@@ -259,21 +259,15 @@ elif lights == 2:
 elif lights == 3:
     ticktock(10, 5, getColour(colourOne), getColour(colourTwo))
 elif lights == 4:
-    setAllPixels(getColour(colourOne))
-    flashLights(0.5)
-elif lights == 5:
-    setAllPixels(getColour(colourTwo))
-    flashLights(0.5)
-elif lights == 6:
     chasePixels(100, -5, -10, getColour(colourOne), getColour(colourTwo))
-elif lights == 7:
+elif lights == 5:
     chasePixels(100, -5, -10, getColour(colourTwo), getColour(colourOne))
-elif lights == 8:
+elif lights == 6:
     chaseRandomPixels(5, 1, getColour(colourOne), getColour(colourTwo))
-elif lights == 9:
+elif lights == 7:
     chaseRandomPixels(5, 1, getColour(colourTwo), getColour(colourOne))
-elif lights ==10:
-    rainbow(0.5, 10)
+elif lights ==8:
+    rainbow(0.2, 10)
 
 strip.clear()
 strip.show()
