@@ -7,8 +7,8 @@ bucket = s3.Bucket('netball-ml-processing')
 print(bucket.objects)
 
 source_path = '../'
-destination_path = '/processed'
-file = '99-20180621221554-05.jpg'
+destination_path = 'processed'
+file = '99-20180621221607-00.jpg'
 
 #s3.meta.client.upload_file('/Users/andrewhammond/s3_upload.jpg','netball-ml-processing', 's3_upload.jpg')
 
