@@ -20,7 +20,7 @@ for f in os.listdir(os.getcwd()):
     file_name, file_ext = os.path.splitext(f)
 
     #need to check the file starts with 2 (as in the timestamp) and is a .jpg
-    if file_ext == '.jpg' and file_name[0:1] == '2':
+    if file_ext == '.jpg':
         print("working with this file " + f)
 
         # s3.meta.client.upload_file('/Users/andrewhammond/s3_upload.jpg','netball-ml-processing', 's3_upload.jpg')
