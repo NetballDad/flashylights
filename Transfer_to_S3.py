@@ -1,6 +1,6 @@
 import boto3, os, shutil
 
-session = boto3.Session('default')
+session = boto3.Session(profile_name='default')
 
 s3 = boto3.resource('s3')
 
