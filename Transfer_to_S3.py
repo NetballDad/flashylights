@@ -15,6 +15,8 @@ os.chdir('/home/motion/netball-images')
 for f in os.listdir(os.getcwd()):
     #print("into for files_processed")
 
+    file_name, file_ext = os.path.splitext(f)
+
     #need to check the file starts with 2 (as in the timestamp) and is a .jpg
     if file_ext == '.jpg' and file_name[0:1] == '2':
         #print("into if statement")
