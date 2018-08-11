@@ -1,10 +1,12 @@
 import boto3, os, shutil
 
+session = boto3.Session('default')
+
 s3 = boto3.resource('s3')
 
 bucket = s3.Bucket('netball-ml-processing')
 
-print(bucket.objects)
+#print(bucket.objects)
 
 #needs to be run with *** sudo ****  otherwise it won't work...
 
