@@ -6,15 +6,30 @@ bucket = s3.Bucket('netball-ml-processing')
 
 print(bucket.objects)
 
-source_path = '../'
-destination_path = 'processed'
-file = '99-20180621221607-00.jpg'
+#needs to be run with *** sudo ****  otherwise it won't work...
 
-#s3.meta.client.upload_file('/Users/andrewhammond/s3_upload.jpg','netball-ml-processing', 's3_upload.jpg')
+#change to the motion working Directory
 
-s3.meta.client.upload_file(source_path + file,'netball-ml-processing', file)
+os.chdir('/home/motion/netball-images')
 
-#once pushed to s3 need to shift locally.
-shutil.move(source_path + file, source_path + destination_path)
+for f in os.listdir(os.getcwd()):
+    #print("into for files_processed")
+
+    #need to check the file starts with 2 (as in the timestamp) and is a .jpg
+    if file_ext == '.jpg' and file_name[0:1] == '2':
+        #print("into if statement")
+
+        # s3.meta.client.upload_file('/Users/andrewhammond/s3_upload.jpg','netball-ml-processing', 's3_upload.jpg')
+        s3.meta.client.upload_file(f, 'netball-ml-processing', f)
+
+        # once pushed to s3 need to shift locally.
+        shutil.move(f, '/home/motion/netball-images/shifted_to_s3')
+
+
+
+
+
+
+
 
 
