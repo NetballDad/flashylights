@@ -126,7 +126,7 @@ graph = load_graph(model_file)
 
 print(os.getcwd())
 
-os.chdir('./ML-Processing')
+os.chdir('../ML-Processing')
 
 for f in os.listdir(os.getcwd()):
 
