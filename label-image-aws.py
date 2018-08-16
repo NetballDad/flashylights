@@ -114,8 +114,11 @@ if __name__ == "__main__":
     # --image =$HOME / flower_photos / daisy / 21652746_cc379e0eea_m.jpg
 
 log = open("ML_log.txt", "w+")
+
 log.writelines("started processing at " + str(datetime.datetime.now()) + "\r\n")
+
 print("started processing at " + str(datetime.datetime.now()) + "\r\n")
+
 files_processed = 0
 
 # load the model file
@@ -127,74 +130,74 @@ os.chdir('./ML-Processing')
 
 for f in os.listdir(os.getcwd()):
 
-print("into for files_processed")
+    print("into for files_processed")
 
-file_name, file_ext = os.path.splitext(f)
-# print(file_name)
+    file_name, file_ext = os.path.splitext(f)
+    # print(file_name)
 
-full_file_name = file_name + file_ext
+    full_file_name = file_name + file_ext
 
-print(" the first letter of the file is " + file_name[0:1])
-# 2018-06-21-18-14-19-01-13_maybe_ball in frame=0.516
-# need to check the file starts with 2 (as in the timestamp) and is a .jpg
-if file_ext == '.jpg' and file_name[0:1] == '2':
-    # print("into if statement")
+    print(" the first letter of the file is " + file_name[0:1])
+    # 2018-06-21-18-14-19-01-13_maybe_ball in frame=0.516
+    # need to check the file starts with 2 (as in the timestamp) and is a .jpg
+    if file_ext == '.jpg' and file_name[0:1] == '2':
+        # print("into if statement")
 
-    log.writelines("Processing file number " + str(files_processed) + "\r\n")
-    log.writelines(full_file_name + "\r\n")
-    log.writelines("Actually processing this file" + "\r\n")
-    # load move file was here.
+        log.writelines("Processing file number " + str(files_processed) + "\r\n")
+        log.writelines(full_file_name + "\r\n")
+        log.writelines("Actually processing this file" + "\r\n")
+        # load move file was here.
 
-    t = read_tensor_from_image_file(
-        full_file_name,
-        input_height=input_height,
-        input_width=input_width,
-        input_mean=input_mean,
-        input_std=input_std)
+        t = read_tensor_from_image_file(
+            full_file_name,
+            input_height=input_height,
+            input_width=input_width,
+            input_mean=input_mean,
+            input_std=input_std)
 
-    input_name = "import/" + input_layer
-    output_name = "import/" + output_layer
-    input_operation = graph.get_operation_by_name(input_name)
-    output_operation = graph.get_operation_by_name(output_name)
+        input_name = "import/" + input_layer
+        output_name = "import/" + output_layer
+        input_operation = graph.get_operation_by_name(input_name)
+        output_operation = graph.get_operation_by_name(output_name)
 
-    with tf.Session(graph=graph) as sess:
-        results = sess.run(output_operation.outputs[0], {
-            input_operation.outputs[0]: t
-        })
-    results = np.squeeze(results)
+        with tf.Session(graph=graph) as sess:
+            results = sess.run(output_operation.outputs[0], {
+                input_operation.outputs[0]: t
+            })
+        results = np.squeeze(results)
 
-    top_k = results.argsort()[-5:][::-1]
-    labels = load_labels(label_file)
-    loop = 0
-    for i in top_k:
-        print(labels[i], results[i])
-        # print(str(i))
-        # print(str(len(top_k)))
+        top_k = results.argsort()[-5:][::-1]
+        labels = load_labels(label_file)
+        loop = 0
+        for i in top_k:
+            print(labels[i], results[i])
+            # print(str(i))
+            # print(str(len(top_k)))
 
-        log.write(str(labels[i]) + "_" + str(results[i]) + "\r\n")
+            log.write(str(labels[i]) + "_" + str(results[i]) + "\r\n")
 
-        if loop == 0:
-            # the first loop contains the higest likelihood classification
+            if loop == 0:
+                # the first loop contains the higest likelihood classification
 
-            if results[i] >= 0.8:
-                # we should only classify things that we think are more than 50% meant to be something
-                # rename the file
-                os.rename(f, file_name + "_" + str(labels[i])[0:10] + "=" + str(results[i])[0:5] + file_ext)
-                loop += 1
-            else:
-                os.rename(f, file_name + "_maybe_" + str(labels[i]) + "=" + str(results[i])[0:5] + file_ext)
-                loop += 1
+                if results[i] >= 0.8:
+                    # we should only classify things that we think are more than 50% meant to be something
+                    # rename the file
+                    os.rename(f, file_name + "_" + str(labels[i])[0:10] + "=" + str(results[i])[0:5] + file_ext)
+                    loop += 1
+                else:
+                    os.rename(f, file_name + "_maybe_" + str(labels[i]) + "=" + str(results[i])[0:5] + file_ext)
+                    loop += 1
 
-    files_processed += 1
+        files_processed += 1
 
-    log.writelines("finshed processing at " + str(datetime.datetime.now()) + "\r\n")
+        log.writelines("finshed processing at " + str(datetime.datetime.now()) + "\r\n")
 
-    log.writelines("about to copy file to processed folder \r\n")
+        log.writelines("about to copy file to processed folder \r\n")
 
-    shutil.move(f, "./ML-Processed")
+        shutil.move(f, "./ML-Processed")
 
-    log.writelines("file should be moved now \r\n")
+        log.writelines("file should be moved now \r\n")
 
-    # log.writelines("finshed run at _" + str(datetime.datetime.now()))
+        # log.writelines("finshed run at _" + str(datetime.datetime.now()))
 
-    #added comment
+        #added comment
