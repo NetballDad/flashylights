@@ -180,25 +180,25 @@ for f in sorted(file_list):
 
             if loop == 0:
                 # the first loop contains the higest likelihood classification
+                new_file_name = ""
 
                 if results[i] >= 0.8:
                     # we should only classify things that we think are more than 50% meant to be something
                     # rename the file
-                    os.rename(f, file_name + "_" + str(labels[i])[0:10] + "=" + str(results[i])[0:5] + file_ext)
+                    new_file_name = file_name + "_" + str(labels[i])[0:10] + "=" + str(results[i])[0:5] + file_ext
+                    os.rename(f, new_file_name)
+                    shutil.move(new_file_name, "../ML-Processed")
                     loop += 1
                 else:
-                    os.rename(f, file_name + "_maybe_" + str(labels[i]) + "=" + str(results[i])[0:5] + file_ext)
+                    new_file_name = file_name + "_maybe_" + str(labels[i]) + "=" + str(results[i])[0:5] + file_ext
+                    os.rename(f, new_file_name)
+                    shutil.move(new_file_name, "../ML-Processed")
                     loop += 1
 
         files_processed += 1
+        new_file_name = ""
 
         log.writelines("finshed processing at " + str(datetime.datetime.now()) + "\r\n")
-
-        log.writelines("about to copy file to processed folder \r\n")
-
-        shutil.move(f, "./ML-Processed")
-
-        log.writelines("file should be moved now \r\n")
 
         # log.writelines("finshed run at _" + str(datetime.datetime.now()))
 
