@@ -25,10 +25,11 @@ for f in os.listdir(os.getcwd()):
     if file_ext == '.jpg':
         print("working with this file " + f)
 
+        print("about to upload " + str(datetime.datetime.now()) + "\r\n")
         # s3.meta.client.upload_file('/Users/andrewhammond/s3_upload.jpg','netball-ml-processing', 's3_upload.jpg')
         s3.meta.client.upload_file(f, 'netball-ml-processing', f)
 
-        print ("should of uploaded to s3")
+        print ("Uploaded to S3 " + str(datetime.datetime.now()) + "\r\n")
 
         # once pushed to s3 need to shift locally.
         shutil.move(f, '/home/motion/netball-images/shifted_to_s3')
