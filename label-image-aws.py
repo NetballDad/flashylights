@@ -128,7 +128,9 @@ print(os.getcwd())
 
 os.chdir('../ML-Processing')
 
-for f in os.listdir(os.getcwd()):
+file_list = os.listdir(os.getcwd())
+
+for f in sorted(file_list):
 
     print("into for files_processed")
 
