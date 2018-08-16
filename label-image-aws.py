@@ -97,7 +97,7 @@ if __name__ == "__main__":
     parser.add_argument("--output_layer", help="name of output layer")
     args = parser.parse_args()
 
-    model_file = "retrained_graph.pb"
+    model_file = "../retrained_graph.pb"
     # need to loop through the files in the directory
     # file_name = args.image
     label_file = "../retrained_labels.txt"
