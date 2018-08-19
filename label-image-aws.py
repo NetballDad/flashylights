@@ -115,14 +115,16 @@ if __name__ == "__main__":
 
 log = open("ML_log.txt", "w+")
 
-log.writelines("started processing at " + str(datetime.datetime.now()) + "\r\n")
+log.writelines(str(datetime.datetime.now()) + "*** started processing at " +  "\r\n")
 
 print("started processing at " + str(datetime.datetime.now()) + "\r\n")
 
 files_processed = 0
 
+log.writelines(str(datetime.datetime.now()) + "  loading model " +  "\r\n")
 # load the model file
 graph = load_graph(model_file)
+log.writelines( str(datetime.datetime.now()) + "  finished loading model " + "\r\n")
 
 print(os.getcwd())
 
@@ -131,7 +133,7 @@ os.chdir('../ML-Processing')
 file_list = os.listdir(os.getcwd())
 
 for f in sorted(file_list):
-
+    log.writelines(str(datetime.datetime.now()) +  "  pre-processing file " + "\r\n")
     print("into for files_processed")
 
     file_name, file_ext = os.path.splitext(f)
@@ -142,35 +144,48 @@ for f in sorted(file_list):
     print(" the first letter of the file is " + file_name[0:1])
     # 2018-06-21-18-14-19-01-13_maybe_ball in frame=0.516
     # need to check the file starts with 2 (as in the timestamp) and is a .jpg
+
+    log.writelines(str(datetime.datetime.now()) + "  pre-processing finished " +  "\r\n")
+
     if file_ext == '.jpg' and file_name[0:1] == '2':
         # print("into if statement")
 
-        log.writelines("Processing file number " + str(files_processed) + "\r\n")
+        log.writelines(str(files_processed) + " ******* Processing file number " + "\r\n")
         log.writelines(full_file_name + "\r\n")
-        log.writelines("Actually processing this file" + "\r\n")
+#        log.writelines("Actually processing this file" + "\r\n")
         # load move file was here.
 
+        log.writelines(str(datetime.datetime.now()) +  "  reading file " + "\r\n")
         t = read_tensor_from_image_file(
             full_file_name,
             input_height=input_height,
             input_width=input_width,
             input_mean=input_mean,
             input_std=input_std)
+        log.writelines(str(datetime.datetime.now()) + "  file read " +  "\r\n")
 
         input_name = "import/" + input_layer
         output_name = "import/" + output_layer
         input_operation = graph.get_operation_by_name(input_name)
         output_operation = graph.get_operation_by_name(output_name)
 
+        log.writelines(str(datetime.datetime.now()) + "  processing file " +  "\r\n")
+
         with tf.Session(graph=graph) as sess:
             results = sess.run(output_operation.outputs[0], {
                 input_operation.outputs[0]: t
             })
+        log.writelines(str(datetime.datetime.now()) +  "  about to squeeze file " + "\r\n")
+
         results = np.squeeze(results)
+
+        log.writelines(str(datetime.datetime.now()) + "  about to sort results " +  "\r\n")
 
         top_k = results.argsort()[-5:][::-1]
         labels = load_labels(label_file)
         loop = 0
+        log.writelines(str(datetime.datetime.now()) + "  print out ordered results " +  "\r\n")
+
         for i in top_k:
             print(labels[i], results[i])
             # print(str(i))
@@ -178,7 +193,10 @@ for f in sorted(file_list):
 
             log.write(str(labels[i]) + "_" + str(results[i]) + "\r\n")
 
+
             if loop == 0:
+
+                log.writelines(str(datetime.datetime.now()) + " renaming and moving file " +  "\r\n")
                 # the first loop contains the higest likelihood classification
                 new_file_name = ""
 
@@ -198,8 +216,11 @@ for f in sorted(file_list):
         files_processed += 1
         new_file_name = ""
 
-        log.writelines("finshed processing at " + str(datetime.datetime.now()) + "\r\n")
+        log.writelines(str(datetime.datetime.now()) +  "*** finshed processing at " + "\r\n")
 
         # log.writelines("finshed run at _" + str(datetime.datetime.now()))
 
         #added comment
+##
+#Could add in the AWS cp commands to move files back to S3 (or work with S3 files??)
+##
