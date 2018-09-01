@@ -10,7 +10,7 @@ bucket = s3.Bucket('netball-ml-processing')
 
 #needs to be run with *** sudo ****  otherwise it won't work...
 
-while true:
+while True:
 
     #change to the motion working Directory
     os.chdir('/home/motion/netball-images')
