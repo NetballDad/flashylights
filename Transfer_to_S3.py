@@ -1,4 +1,4 @@
-import boto3, os, shutil
+import boto3, os, shutil, datetime
 
 session = boto3.Session(profile_name='default')
 
@@ -36,6 +36,8 @@ while True:
             shutil.move(f, '/home/motion/netball-images/shifted_to_s3')
 
             print ("should of moved the file locally")
+
+    print ("sleeping, ")
     time.sleep(2)
 
 
