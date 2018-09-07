@@ -226,7 +226,6 @@ for f in sorted(file_list):
             shutil.move(str(new_file_name), "../ML-Processed")
             files_processed += 1
             new_file_name = ""
-            break
 
         except:
             print ("in exception handling")
