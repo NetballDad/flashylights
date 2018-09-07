@@ -199,7 +199,6 @@ for f in sorted(file_list):
 
             log.write(str(labels[i]) + "_" + str(results[i]) + "\r\n")
 
-
             if loop == 0:
 
                 log.writelines(str(datetime.datetime.now()) + " renaming and moving file " + "\r\n")
@@ -211,16 +210,16 @@ for f in sorted(file_list):
                     # rename the file
                     new_file_name = file_name + "_" + str(labels[i])[0:10] + "=" + str(results[i])[0:5] + file_ext
                     os.rename(f, new_file_name)
-                    s3.meta.client.upload_file(f, 'netball-ml-Processed', str(args.BucketFolder) + "/" + f)
-                    shutil.move(new_file_name, "../ML-Processed")
                     loop += 1
                 else:
                     new_file_name = file_name + "_maybe_" + str(labels[i]) + "=" + str(results[i])[0:5] + file_ext
                     os.rename(f, new_file_name)
-                    s3.meta.client.upload_file(f, 'netball-ml-Processed', str(args.BucketFolder) + "/" + f)
-                    shutil.move(new_file_name, "../ML-Processed")
                     loop += 1
 
+        print(new_file_name)
+
+        s3.meta.client.upload_file(new_file_name, 'netball-ml-Processed', str(args.BucketFolder) + "/" + new_file_name)
+        shutil.move(new_file_name, "../ML-Processed")
         files_processed += 1
         new_file_name = ""
 
