@@ -133,7 +133,7 @@ log.writelines(str(datetime.datetime.now()) + "  loading model " + "\r\n")
 graph = load_graph(model_file)
 log.writelines( str(datetime.datetime.now()) + "  finished loading model " + "\r\n")
 
-print(os.getcwd())
+#print(os.getcwd())
 
 os.chdir('../ML-Processing')
 
@@ -141,14 +141,14 @@ file_list = os.listdir(os.getcwd())
 
 for f in sorted(file_list):
     log.writelines(str(datetime.datetime.now()) +  "  pre-processing file " + "\r\n")
-    print("into for files_processed")
+    #print("into for files_processed")
 
     file_name, file_ext = os.path.splitext(f)
-    # print(file_name)
+    print(file_name)
 
     full_file_name = file_name + file_ext
 
-    print(" the first letter of the file is " + file_name[0:1])
+    #print(" the first letter of the file is " + file_name[0:1])
     # 2018-06-21-18-14-19-01-13_maybe_ball in frame=0.516
     # need to check the file starts with 2 (as in the timestamp) and is a .jpg
 
@@ -227,8 +227,9 @@ for f in sorted(file_list):
             files_processed += 1
             new_file_name = ""
 
-        except InvalidArgumentError:
+        except tf.python.framework.errors_impl.InvalidArgumentError:
             log.writelines(str(datetime.datetime.now()) + "invalid file detected" + "\r\n")
+            print(tf.python.framework.errors_impl.InvalidArgumentError)
             shutil.move(str(f, "../ML-Processed/invalidfiles/"))
 
         log.writelines(str(datetime.datetime.now()) + "*** finshed processing at " + "\r\n")
