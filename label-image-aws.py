@@ -162,72 +162,76 @@ for f in sorted(file_list):
 #        log.writelines("Actually processing this file" + "\r\n")
         # load move file was here.
 
-        log.writelines(str(datetime.datetime.now()) + "  reading file " + "\r\n")
-        t = read_tensor_from_image_file(
-            full_file_name,
-            input_height=input_height,
-            input_width=input_width,
-            input_mean=input_mean,
-            input_std=input_std)
-        log.writelines(str(datetime.datetime.now()) + "  file read " + "\r\n")
+        try:
 
-        input_name = "import/" + input_layer
-        output_name = "import/" + output_layer
-        input_operation = graph.get_operation_by_name(input_name)
-        output_operation = graph.get_operation_by_name(output_name)
+            log.writelines(str(datetime.datetime.now()) + "  reading file " + "\r\n")
+            t = read_tensor_from_image_file(
+                full_file_name,
+                input_height=input_height,
+                input_width=input_width,
+                input_mean=input_mean,
+                input_std=input_std)
+            log.writelines(str(datetime.datetime.now()) + "  file read " + "\r\n")
 
-        log.writelines(str(datetime.datetime.now()) + "  processing file " + "\r\n")
+            input_name = "import/" + input_layer
+            output_name = "import/" + output_layer
+            input_operation = graph.get_operation_by_name(input_name)
+            output_operation = graph.get_operation_by_name(output_name)
 
-        with tf.Session(graph=graph) as sess:
-            results = sess.run(output_operation.outputs[0], {
-                input_operation.outputs[0]: t
-            })
-        log.writelines(str(datetime.datetime.now()) + "  about to squeeze file " + "\r\n")
+            log.writelines(str(datetime.datetime.now()) + "  processing file " + "\r\n")
 
-        results = np.squeeze(results)
+            with tf.Session(graph=graph) as sess:
+                results = sess.run(output_operation.outputs[0], {
+                    input_operation.outputs[0]: t
+                })
+            log.writelines(str(datetime.datetime.now()) + "  about to squeeze file " + "\r\n")
 
-        log.writelines(str(datetime.datetime.now()) + "  about to sort results " + "\r\n")
-        top_k = results.argsort()[-5:][::-1]
-        labels = load_labels(label_file)
-        loop = 0
-        log.writelines(str(datetime.datetime.now()) + "  print out ordered results " + "\r\n")
+            results = np.squeeze(results)
 
-        for i in top_k:
-            print(labels[i], results[i])
-            # print(str(i))
-            # print(str(len(top_k)))
+            log.writelines(str(datetime.datetime.now()) + "  about to sort results " + "\r\n")
+            top_k = results.argsort()[-5:][::-1]
+            labels = load_labels(label_file)
+            loop = 0
+            log.writelines(str(datetime.datetime.now()) + "  print out ordered results " + "\r\n")
 
-            log.write(str(labels[i]) + "_" + str(results[i]) + "\r\n")
+            for i in top_k:
+                print(labels[i], results[i])
+                # print(str(i))
+                # print(str(len(top_k)))
 
-            if loop == 0:
+                log.write(str(labels[i]) + "_" + str(results[i]) + "\r\n")
 
-                log.writelines(str(datetime.datetime.now()) + " renaming and moving file " + "\r\n")
-                # the first loop contains the higest likelihood classification
-                new_file_name = ""
+                if loop == 0:
 
-                if results[i] >= 0.8:
-                    # we should only classify things that we think are more than 50% meant to be something
-                    # rename the file
-                    new_file_name = file_name + "_" + str(labels[i])[0:10] + "=" + str(results[i])[0:5] + file_ext
-                    os.rename(f, new_file_name)
-                    loop += 1
-                else:
-                    new_file_name = file_name + "_maybe_" + str(labels[i]) + "=" + str(results[i])[0:5] + file_ext
-                    os.rename(f, new_file_name)
-                    loop += 1
+                    log.writelines(str(datetime.datetime.now()) + " renaming and moving file " + "\r\n")
+                    # the first loop contains the higest likelihood classification
+                    new_file_name = ""
 
-        print(new_file_name)
+                    if results[i] >= 0.8:
+                        # we should only classify things that we think are more than 50% meant to be something
+                        # rename the file
+                        new_file_name = file_name + "_" + str(labels[i])[0:10] + "=" + str(results[i])[0:5] + file_ext
+                        os.rename(f, new_file_name)
+                        loop += 1
+                    else:
+                        new_file_name = file_name + "_maybe_" + str(labels[i]) + "=" + str(results[i])[0:5] + file_ext
+                        os.rename(f, new_file_name)
+                        loop += 1
 
-        uploadFileName = new_file_name.replace(" ", "")
+            print(new_file_name)
 
-        s3.meta.client.upload_file(uploadFileName, 'netball-ml-Processed', str(args.BucketFolder + "/" + uploadFileName))
-        shutil.move(str(new_file_name), "../ML-Processed")
-        files_processed += 1
-        new_file_name = ""
+            uploadFileName = new_file_name.replace(" ", "")
 
-        log.writelines(str(datetime.datetime.now()) +  "*** finshed processing at " + "\r\n")
+            s3.meta.client.upload_file(new_file_name, 'netball-ml-Processed', str(args.BucketFolder + "/" + uploadFileName))
+            shutil.move(str(new_file_name), "../ML-Processed")
+            files_processed += 1
+            new_file_name = ""
 
-        # log.writelines("finshed run at _" + str(datetime.datetime.now()))
+    except InvalidArgumentError:
+        log.writelines(str(datetime.datetime.now()) + "invalid file detected" + "\r\n")
+        shutil.move(str(f, "../ML-Processed/invalidfiles/")
+
+    log.writelines(str(datetime.datetime.now()) + "*** finshed processing at " + "\r\n")
 
         #added comment
 ##
