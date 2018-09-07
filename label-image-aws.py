@@ -226,8 +226,10 @@ for f in sorted(file_list):
             shutil.move(str(new_file_name), "../ML-Processed")
             files_processed += 1
             new_file_name = ""
+            break
 
         except:
+            print ("in exception handling")
             log.writelines(str(datetime.datetime.now()) + "invalid file detected" + "\r\n")
             e = sys.exc_info()[0]
             print(e)
