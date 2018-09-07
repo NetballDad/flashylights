@@ -18,11 +18,17 @@ from __future__ import division
 from __future__ import print_function
 
 import argparse
-import os, sys, datetime, shutil
+import os, sys, datetime, shutil, boto3
 
 import numpy as np
 import tensorflow as tf
 
+
+session = boto3.Session(profile_name='default')
+
+s3 = boto3.resource('s3')
+
+bucket = s3.Bucket('netball-ml-processing')
 
 def load_graph(model_file):
     graph = tf.Graph()
@@ -205,11 +211,13 @@ for f in sorted(file_list):
                     # rename the file
                     new_file_name = file_name + "_" + str(labels[i])[0:10] + "=" + str(results[i])[0:5] + file_ext
                     os.rename(f, new_file_name)
+                    s3.meta.client.upload_file(f, 'netball-ml-Processed', str(sys.argv[1]) + "/" + f)
                     shutil.move(new_file_name, "../ML-Processed")
                     loop += 1
                 else:
                     new_file_name = file_name + "_maybe_" + str(labels[i]) + "=" + str(results[i])[0:5] + file_ext
                     os.rename(f, new_file_name)
+                    s3.meta.client.upload_file(f, 'netball-ml-Processed', str(sys.argv[1]) + "/" + f)
                     shutil.move(new_file_name, "../ML-Processed")
                     loop += 1
 
