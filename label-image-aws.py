@@ -231,9 +231,4 @@ for f in sorted(file_list):
             log.writelines(str(datetime.datetime.now()) + "invalid file detected" + "\r\n")
             shutil.move(str(f, "../ML-Processed/invalidfiles/")
 
-    log.writelines(str(datetime.datetime.now()) + "*** finshed processing at " + "\r\n")
-
-        #added comment
-##
-#Could add in the AWS cp commands to move files back to S3 (or work with S3 files??)
-##
+        log.writelines(str(datetime.datetime.now()) + "*** finshed processing at " + "\r\n")
