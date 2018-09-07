@@ -144,7 +144,7 @@ for f in sorted(file_list):
     print("into for files_processed")
 
     file_name, file_ext = os.path.splitext(f)
-    # print(file_name)
+    print(file_name)
 
     full_file_name = file_name + file_ext
 
@@ -216,12 +216,17 @@ for f in sorted(file_list):
                     os.rename(f, new_file_name)
                     loop += 1
 
-        print(new_file_name)
+  #      print(new_file_name)
 
-        uploadFileName = new_file_name.replace(" ", "")
+ #       uploadFileName = new_file_name.replace(" ", "")
 
-        s3.meta.client.upload_file(uploadFileName, 'netball-ml-Processed', str(args.BucketFolder + "/" + uploadFileName))
+#	print (uploadFileName)
+#	print (os.getcwd())
+
+#        s3.meta.client.upload_file(new_file_name, 'netball-ml-Processed', str(args.BucketFolder + "/" + uploadFileName))
+
         shutil.move(str(new_file_name), "../ML-Processed")
+
         files_processed += 1
         new_file_name = ""
 
