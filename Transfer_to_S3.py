@@ -1,4 +1,4 @@
-import boto3, os, shutil, datetime, time
+import boto3, os, shutil, datetime, time, sys
 
 session = boto3.Session(profile_name='default')
 
@@ -28,7 +28,7 @@ while True:
 
             print("about to upload " + str(datetime.datetime.now()) + "\r\n")
             # s3.meta.client.upload_file('/Users/andrewhammond/s3_upload.jpg','netball-ml-processing', 's3_upload.jpg')
-            s3.meta.client.upload_file(f, 'netball-ml-processing', f)
+            s3.meta.client.upload_file(f, 'netball-ml-processing', str(sys.argv[1]) + "/" + f)
 
             print ("Uploaded to S3 " + str(datetime.datetime.now()) + "\r\n")
 
