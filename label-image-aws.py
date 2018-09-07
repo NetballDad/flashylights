@@ -153,7 +153,7 @@ for f in sorted(file_list):
 
     log.writelines(str(datetime.datetime.now()) + "  pre-processing finished " +  "\r\n")
 
-    if file_ext == '.jpg' and file_name[0:1] == '2':
+    if file_ext == '.jpg':
         # print("into if statement")
 
         log.writelines(str(files_processed) + " ******* Processing file number " + "\r\n")
