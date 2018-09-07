@@ -222,7 +222,7 @@ for f in sorted(file_list):
 
             uploadFileName = new_file_name.replace(" ", "")
 
-            s3.meta.client.upload_file(new_file_name, 'netball-ml-Processed', str(args.BucketFolder + "/" + uploadFileName))
+            #s3.meta.client.upload_file(new_file_name, 'netball-ml-Processed', str(args.BucketFolder + "/" + uploadFileName))
             shutil.move(str(new_file_name), "../ML-Processed")
             files_processed += 1
             new_file_name = ""
