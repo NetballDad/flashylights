@@ -231,7 +231,7 @@ for f in sorted(file_list):
             log.writelines(str(datetime.datetime.now()) + "invalid file detected" + "\r\n")
             e = sys.exc_info()[0]
             print(e)
-            shutil.move(str(f, "../ML-Processed/invalidfiles/"))
+            shutil.move(f, "../ML-Processed/invalidfiles/")
 
         log.writelines(str(datetime.datetime.now()) + "*** finshed processing at " + "\r\n")
 
