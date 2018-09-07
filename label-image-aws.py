@@ -227,8 +227,10 @@ for f in sorted(file_list):
             files_processed += 1
             new_file_name = ""
 
+            log.writelines(str(datetime.datetime.now()) + "*** finshed processing at " + "\r\n")
+
         except InvalidArgumentError:
             log.writelines(str(datetime.datetime.now()) + "invalid file detected" + "\r\n")
             shutil.move(str(f, "../ML-Processed/invalidfiles/")
+            log.writelines(str(datetime.datetime.now()) + "*** finshed processing at " + "\r\n")
 
-        log.writelines(str(datetime.datetime.now()) + "*** finshed processing at " + "\r\n")
