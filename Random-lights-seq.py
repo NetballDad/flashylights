@@ -149,6 +149,10 @@ def setAllPixels(colour):
 
 
 def splitPixels(l, colour):
+
+    print l
+    print colour
+
     for sl in range(l):
         setAllPixels(colour)
         strip.show()
@@ -156,6 +160,10 @@ def splitPixels(l, colour):
 	mid = numpixels/2
         midLeft = mid -1
         midRight = mid
+
+        print mid
+        print midLeft
+        print midRight
 
         for p in range(mid):
             strip.setPixelColor(midLeft, 0, 0, 0)
@@ -247,7 +255,7 @@ for o in sys.argv:
         sys.exit()
 
 
-lights = random.randint(0, 8)
+lights = random.randint(0, 4)
 
 print("lights is " + str(lights))
 # print(colourOne)
