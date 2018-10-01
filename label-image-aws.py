@@ -207,11 +207,13 @@ for f in sorted(file_list):
                     # the first loop contains the higest likelihood classification
                     new_file_name = ""
 
-                    if results[i] >= 0.8:
-                        # we should only classify things that we think are more than 50% meant to be something
+                    if results[i] >= 0.7:
+                        # we should only classify things that we think are more than 70% meant to be something
                         # rename the file
                         new_file_name = file_name + "_" + str(labels[i])[0:10] + "=" + str(results[i])[0:5] + file_ext
                         os.rename(f, new_file_name)
+                        #we only want to save the images that are better than 70% predictions.
+                        s3.meta.client.upload_file(new_file_name, 'netball-ml-processing', str(args.BucketFolder) + "/" + str(labels[i])[0:10] + "/" + new_file_name)
                         loop += 1
                     else:
                         new_file_name = file_name + "_maybe_" + str(labels[i]) + "=" + str(results[i])[0:5] + file_ext
@@ -222,7 +224,7 @@ for f in sorted(file_list):
 
             uploadFileName = new_file_name.replace(" ", "")
 
-            #s3.meta.client.upload_file(new_file_name, 'netball-ml-Processed', str(args.BucketFolder + "/" + uploadFileName))
+
             shutil.move(str(new_file_name), "../ML-Processed")
             files_processed += 1
             new_file_name = ""
