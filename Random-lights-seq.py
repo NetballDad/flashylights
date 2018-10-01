@@ -234,7 +234,8 @@ colourOne = str(sys.argv[1])
 colourTwo = str(sys.argv[2])
 numpixels = str(sys.argv[3])
 
-for o, a in sys.argv:
+for o in sys.argv:
+
     if sys.argv[1] == "":
         print "missing first colour"
         sys.exit()
