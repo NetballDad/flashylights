@@ -247,28 +247,37 @@ for o in sys.argv:
         sys.exit()
 
 
-lights = random.randint(0, 4)
+lights = random.randint(0, 8)
 
 print("lights is " + str(lights))
 # print(colourOne)
 
 if lights == 0:
+    print "splitPixels(3, getColour(colourOne))"
     splitPixels(3, getColour(colourOne))
 elif lights == 1:
+    print "splitPixels(3, getColour(colourTwo))"
     splitPixels(3, getColour(colourTwo))
 elif lights == 2:
+    print "ticktock(5, 5, getColour(colourOne), getColour(colourTwo))"
     ticktock(5, 5, getColour(colourOne), getColour(colourTwo))
 elif lights == 3:
+    print "ticktock(10, 5, getColour(colourOne), getColour(colourTwo))"
     ticktock(10, 5, getColour(colourOne), getColour(colourTwo))
 elif lights == 4:
+    print "chasePixels(100, -5, -10, getColour(colourOne), getColour(colourTwo))""
     chasePixels(100, -5, -10, getColour(colourOne), getColour(colourTwo))
 elif lights == 5:
+    print "chasePixels(100, -5, -10, getColour(colourTwo), getColour(colourOne))"
     chasePixels(100, -5, -10, getColour(colourTwo), getColour(colourOne))
 elif lights == 6:
+    print "chaseRandomPixels(5, 1, getColour(colourOne), getColour(colourTwo))"
     chaseRandomPixels(5, 1, getColour(colourOne), getColour(colourTwo))
 elif lights == 7:
+    print "chaseRandomPixels(5, 1, getColour(colourTwo), getColour(colourOne))"
     chaseRandomPixels(5, 1, getColour(colourTwo), getColour(colourOne))
 elif lights ==8:
+    print "rainbow(0.2, 10)"
     rainbow(0.2, 10)
 
 strip.clear()
