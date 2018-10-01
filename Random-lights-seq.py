@@ -96,7 +96,7 @@ def ticktock(size, loops, colourA, colourB):
 
 def chaseRandomPixels(loops, tail, colourA, colourB):
     strip.clear()
-    strip.setBrightness(125)
+    strip.setBrightness(100)
     start = random.randint(5, 10)
     print ("starting at" + str(start))
     chaser = random.randint(0, 5)
@@ -150,7 +150,7 @@ def setAllPixels(colour):
     for p in range(numpixels):
         print "setting pixels now" + str(p)
         strip.setPixelColor(p, colour[1], colour[2], colour[3])
-    strip.setBrightness(125)
+    strip.setBrightness(100)
     strip.show()
 
 def splitPixels(l, colour):
@@ -196,7 +196,7 @@ def flashLights(duration):
 
 def chasePixels(loops, mid, tail, colourA, colourB):
     headerPix = 0
-    strip.setBrightness(125)
+    strip.setBrightness(100)
     # to get the flash effect, need to set them up, then show, then clear, then show
     for p in range(loops):
 
