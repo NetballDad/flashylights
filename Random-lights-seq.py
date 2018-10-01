@@ -238,9 +238,15 @@ strip.clear()
 
 #grab the colours from the command line arguments
 #interesting arg 0 is the file name!!
+# 1 is the first Colour
+# 2 is the second Colour
+# 3 is the number of pixels
+
 colourOne = str(sys.argv[1])
 colourTwo = str(sys.argv[2])
 numpixels = int(sys.argv[3])
+
+print numpixels
 
 for o in sys.argv:
 
@@ -259,6 +265,9 @@ lights = random.randint(0, 4)
 
 print("lights is " + str(lights))
 # print(colourOne)
+
+print "after checking values"
+print numpixels
 
 if lights == 0:
     print "splitPixels(3, getColour(colourOne))"
