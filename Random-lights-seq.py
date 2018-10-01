@@ -8,7 +8,7 @@ from dotstar import Adafruit_DotStar
 datapin = 10
 clockpin = 12
 
-numpixels = 38 #which is the therotical max of the Netball ring lights.
+numpixels = 0 #which is the therotical max of the Netball ring lights.
 
 #configure the strip
 
@@ -18,28 +18,16 @@ strip = Adafruit_DotStar(numpixels, 6000000, order='gbr')
 colourArray = [["red", 255, 0, 0],
                ["orange", 255, 0, 128],
                ["yellow", 255, 0, 255],
-               ["light green", 128, 0, 255],
+               ["light-green", 128, 0, 255],
                ["green", 0, 0, 255],
                ["teal", 0, 128, 255],
                ["acqua", 0, 255, 255],
-               ["light blue", 0, 255, 128],
+               ["light-blue", 0, 255, 128],
                ["blue", 0, 255, 0],
                ["purple", 128, 255, 0],
-               ["light purple", 255, 255, 0],
+               ["light-purple", 255, 255, 0],
                ["white", 255, 255, 255],
                ["pink", 255, 128, 0]]
-
-
-
-def getNumpixels():
-    findNumPixels = 0
-    while True:
-        strip.setPixelColor(findNumPixels, 100, 100, 100) #we won't show this setting anyways
-        print("setting this pixel " + str(findNumPixels))
-        findNumPixels += 1
-
-    numpixels = findNumPixels + 1
-    print("this strip has " + str(numpixels) + " in it")
 
 def getColour(colour):
     for c in range(len(colourArray)):
@@ -244,6 +232,19 @@ strip.clear()
 #interesting arg 0 is the file name!!
 colourOne = str(sys.argv[1])
 colourTwo = str(sys.argv[2])
+numpixels = str(sys.argv[3])
+
+for o, a in sys.argv:
+    if sys.argv[1] == "":
+        print "missing first colour"
+        sys.exit()
+    elif sys.argv[2] == "":
+        print "missing second colour"
+        sys.exit()
+    elif sys.argv[2] == "":
+        print "missing number of LEDS"
+        sys.exit()
+
 
 lights = random.randint(0, 4)
 
