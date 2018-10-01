@@ -155,7 +155,7 @@ def setAllPixels(colour):
 
 def splitPixels(l, colour):
 
-    print "loops is " + l
+    print "loops is " + str(l)
     print colour
 
     for sl in range(l):
