@@ -157,16 +157,17 @@ def splitPixels(l, colour):
     for sl in range(l):
         setAllPixels(colour)
         strip.show()
-    print "pixels should be all set now"
 
-	mid = numpixels/2
+        print "pixels should be all set now"
+
+        mid = numpixels/2
         midLeft = mid -1
         midRight = mid
 
         print mid
         print midLeft
         print midRight
-
+    
         for p in range(mid):
             strip.setPixelColor(midLeft, 0, 0, 0)
             strip.setPixelColor(midRight, 0, 0, 0)
