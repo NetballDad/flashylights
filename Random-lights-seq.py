@@ -271,6 +271,10 @@ print("lights is " + str(lights))
 print "after checking values"
 print numpixels
 
+setAllPixels(getColour(colourOne))
+
+print "should be set now - before looping"
+
 if lights == 0:
     print "splitPixels(3, getColour(colourOne))"
     splitPixels(3, getColour(colourOne))
