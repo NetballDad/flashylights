@@ -270,18 +270,10 @@ for o in sys.argv:
         print "missing number of LEDS"
         sys.exit()
 
-
-lights = 1 #random.randint(0, 4)
+lights = random.randint(0, 8)
 
 print("lights is " + str(lights))
 # print(colourOne)
-
-print "after checking values"
-print numpixels
-
-setAllPixels(getColour(colourOne))
-
-print "should be set now - before looping"
 
 if lights == 0:
     print "splitPixels(3, getColour(colourOne))"
