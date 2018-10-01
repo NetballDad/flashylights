@@ -232,7 +232,7 @@ strip.clear()
 #interesting arg 0 is the file name!!
 colourOne = str(sys.argv[1])
 colourTwo = str(sys.argv[2])
-numpixels = str(sys.argv[3])
+numpixels = int(sys.argv[3])
 
 for o in sys.argv:
 
