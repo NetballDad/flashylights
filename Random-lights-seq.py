@@ -265,7 +265,7 @@ elif lights == 3:
     print "ticktock(10, 5, getColour(colourOne), getColour(colourTwo))"
     ticktock(10, 5, getColour(colourOne), getColour(colourTwo))
 elif lights == 4:
-    print "chasePixels(100, -5, -10, getColour(colourOne), getColour(colourTwo))""
+    print "chasePixels(100, -5, -10, getColour(colourOne), getColour(colourTwo))"
     chasePixels(100, -5, -10, getColour(colourOne), getColour(colourTwo))
 elif lights == 5:
     print "chasePixels(100, -5, -10, getColour(colourTwo), getColour(colourOne))"
