@@ -8,7 +8,7 @@ from dotstar import Adafruit_DotStar
 datapin = 10
 clockpin = 12
 
-numpixels = 0 #which is the therotical max of the Netball ring lights.
+numpixels = 38 #which is the therotical max of the Netball ring lights.
 
 #configure the strip
 
