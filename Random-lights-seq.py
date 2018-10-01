@@ -5,10 +5,14 @@ import time, random, sys
 from dotstar import Adafruit_DotStar
 
 # Here's how to control the strip from any two GPIO pins:
+
+print "setting core values"
 datapin = 10
 clockpin = 12
 
 numpixels = 38 #which is the therotical max of the Netball ring lights.
+
+print "strip config complete"
 
 #configure the strip
 
@@ -247,7 +251,10 @@ strip.clear()
 
 colourOne = str(sys.argv[1])
 colourTwo = str(sys.argv[2])
-numpixels = int(sys.argv[3])
+cmdNumPixels = int(sys.argv[3])
+
+if numpixels != cmdNumPixels:
+    numpixels = cmdNumPixels
 
 print numpixels
 
