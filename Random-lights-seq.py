@@ -141,21 +141,23 @@ def setRandomPixels():
 
 
 def setAllPixels(colour):
+
     strip.clear()
     for p in range(numpixels):
+        print "setting pixels now"
         strip.setPixelColor(p, colour[1], colour[2], colour[3])
     strip.setBrightness(125)
     strip.show()
 
-
 def splitPixels(l, colour):
 
-    print l
+    print "loops is " + l
     print colour
 
     for sl in range(l):
         setAllPixels(colour)
         strip.show()
+    print "pixels should be all set now"
 
 	mid = numpixels/2
         midLeft = mid -1
@@ -261,7 +263,7 @@ for o in sys.argv:
         sys.exit()
 
 
-lights = random.randint(0, 4)
+lights = 1 #random.randint(0, 4)
 
 print("lights is " + str(lights))
 # print(colourOne)
