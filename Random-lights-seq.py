@@ -144,7 +144,7 @@ def setAllPixels(colour):
 
     strip.clear()
     for p in range(numpixels):
-        print "setting pixels now"
+        print "setting pixels now" + str(p)
         strip.setPixelColor(p, colour[1], colour[2], colour[3])
     strip.setBrightness(125)
     strip.show()
@@ -167,7 +167,7 @@ def splitPixels(l, colour):
         print mid
         print midLeft
         print midRight
-    
+
         for p in range(mid):
             strip.setPixelColor(midLeft, 0, 0, 0)
             strip.setPixelColor(midRight, 0, 0, 0)
