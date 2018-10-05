@@ -31,7 +31,7 @@ s3 = boto3.resource('s3')
 bucket = s3.Bucket('netball-ml-processing')
 
 #now connect to the DynamoDB
-dynamoDB = boto3.client('dynamodb')
+dynamoDB = boto3.resource('dynamodb')
 dTable = dynamoDB.Table('netball-ml-results')
 
 
