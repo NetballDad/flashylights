@@ -31,7 +31,7 @@ s3 = boto3.resource('s3')
 bucket = s3.Bucket('netball-ml-processing')
 
 #now connect to the DynamoDB
-dynamoDB = boto3.resource('dynamodb')
+dynamoDB = boto3.client('dynamodb')
 dTable = dynamoDB.Table('netball-ml-results')
 
 
@@ -220,7 +220,8 @@ for f in sorted(file_list):
                     # write the details to a DynamoDB table in the cloud.
                     dTable.put_item(
                         Item={
-                            'fileName': file_name,
+                            'FileId': file_name,
+                            'ProcessedDate': str(datetime.datetime.now()),
                             'label': str(labels[i])[0:10],
                             'probability': str(results[i])[0:5],
                             'model': str(args.ModelVersion),
