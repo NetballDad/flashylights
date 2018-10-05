@@ -225,7 +225,8 @@ for f in sorted(file_list):
                             'label': str(labels[i])[0:10],
                             'probability': str(results[i])[0:5],
                             'model': str(args.ModelVersion),
-                            'processed': str("Y")
+                            'processed': str("Y"),
+                            'batch': str(args.BucketFolder)
                         }
                     )
 
