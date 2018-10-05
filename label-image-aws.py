@@ -32,7 +32,7 @@ bucket = s3.Bucket('netball-ml-processing')
 
 #now connect to the DynamoDB
 dynamoDB = boto3.resource('dynamodb')
-dTable = dynamoDB.table('netball-ml-results')
+dTable = dynamoDB.Table('netball-ml-results')
 
 
 def load_graph(model_file):
