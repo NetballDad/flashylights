@@ -221,7 +221,8 @@ for f in sorted(file_list):
                                 'fileName': file_name,
                                 'label': str(labels[i])[0:10],
                                 'probability': str(results[i])[0:5],
-                                'model': str(args.ModelVersion)
+                                'model': str(args.ModelVersion),
+                                'processed': "Y"
                             }
                         )
 
