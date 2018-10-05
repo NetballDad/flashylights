@@ -31,8 +31,7 @@ s3 = boto3.resource('s3')
 bucket = s3.Bucket('netball-ml-processing')
 
 #now connect to the DynamoDB
-dynamodb = boto3.resource('dynamodb', region_name='ap-southeast-2')
-table = dynamodb.Table('netball-ml-results')
+dynamoDB = boto3.client('dynamodb', region_name='ap-southeast-2')
 
 def load_graph(model_file):
     graph = tf.Graph()
@@ -215,8 +214,10 @@ for f in sorted(file_list):
                     if results[i] >= 0.7:
                         # we should only classify things that we think are more than 70% meant to be something
 
+                        print ("about to write to DynamoDB >70%")
                         # write the details to a DynamoDB table in the cloud.
-                        response = table.put_item(
+                        response = dynamoDB.put_item(
+                            TableName = 'netball-ml-results',
                             Item={
                                 'fileName': file_name,
                                 'label': str(labels[i])[0:10],
@@ -232,14 +233,28 @@ for f in sorted(file_list):
                         new_file_name = file_name + "_" + str(labels[i])[0:10] + "=" + str(results[i])[0:5] + file_ext
                         os.rename(f, new_file_name)
                         #we only want to save the images that are better than 70% predictions.
-                        s3.meta.client.upload_file(new_file_name, 'netball-ml-processing', str(args.BucketFolder) + "/" + str(labels[i])[0:10] + "/" + new_file_name)
+                        s3.meta.client.upload_file(new_file_name, 'netball-ml-processed', str(args.BucketFolder) + "/" + str(labels[i])[0:10] + "/" + new_file_name)
 
                         loop += 1
                     else:
+
+                        print("about to write to DynamoDB < 70%")
+                        # write the details to a DynamoDB table in the cloud.
+                        response = dynamoDB.put_item(
+                            TableName='netball-ml-results',
+                            Item={
+                                'fileName': file_name,
+                                'label': str(labels[i])[0:10],
+                                'probability': str(results[i])[0:5],
+                                'model': str(args.ModelVersion),
+                                'processed': "Y"
+                            }
+                        )
+
                         #just upload into the usual folder if result less than 70% probability
                         new_file_name = file_name + "_maybe_" + str(labels[i]) + "=" + str(results[i])[0:5] + file_ext
                         os.rename(f, new_file_name)
-                        s3.meta.client.upload_file(new_file_name, 'netball-ml-processing', str(args.BucketFolder) + "/" + new_file_name)
+                        s3.meta.client.upload_file(new_file_name, 'netball-ml-processed', str(args.BucketFolder) + "-maybe/" + new_file_name)
 
                         loop += 1
 
