@@ -210,24 +210,27 @@ for f in sorted(file_list):
                     log.writelines(str(datetime.datetime.now()) + " renaming and moving file " + "\r\n")
                     # the first loop contains the higest likelihood classification
                     new_file_name = ""
+                    tmp_Label = str(labels[i])[0:10]
+                    tmp_Result = str(results[i])[0:5]
+                    tmp_Model = str(args.ModelVersion)
+
+                    print("about to write to DynamoDB >70%")
+                    # write the details to a DynamoDB table in the cloud.
+                    response = dynamoDB.put_item(
+                        TableName='netball-ml-results',
+                        Item={
+                            'fileName': file_name,
+                            'label': tmp_Label,
+                            'probability': tmp_Result,
+                            'model': tmp_Model,
+                            'processed': "Y"
+                        }
+                    )
+
+                    print("PutItem succeeded:")
 
                     if results[i] >= 0.7:
                         # we should only classify things that we think are more than 70% meant to be something
-
-                        print ("about to write to DynamoDB >70%")
-                        # write the details to a DynamoDB table in the cloud.
-                        response = dynamoDB.put_item(
-                            TableName = 'netball-ml-results',
-                            Item={
-                                'fileName': file_name,
-                                'label': str(labels[i])[0:10],
-                                'probability': str(results[i])[0:5],
-                                'model': str(args.ModelVersion),
-                                'processed': "Y"
-                            }
-                        )
-
-                        print("PutItem succeeded:")
 
                         # rename the file
                         new_file_name = file_name + "_" + str(labels[i])[0:10] + "=" + str(results[i])[0:5] + file_ext
@@ -237,20 +240,6 @@ for f in sorted(file_list):
 
                         loop += 1
                     else:
-
-                        print("about to write to DynamoDB < 70%")
-                        # write the details to a DynamoDB table in the cloud.
-                        response = dynamoDB.put_item(
-                            TableName='netball-ml-results',
-                            Item={
-                                'fileName': file_name,
-                                'label': str(labels[i])[0:10],
-                                'probability': str(results[i])[0:5],
-                                'model': str(args.ModelVersion),
-                                'processed': "Y"
-                            }
-                        )
-
                         #just upload into the usual folder if result less than 70% probability
                         new_file_name = file_name + "_maybe_" + str(labels[i]) + "=" + str(results[i])[0:5] + file_ext
                         os.rename(f, new_file_name)
