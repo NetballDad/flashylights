@@ -31,7 +31,9 @@ s3 = boto3.resource('s3')
 bucket = s3.Bucket('netball-ml-processing')
 
 #now connect to the DynamoDB
-dynamoDB = boto3.client('dynamodb', region_name='ap-southeast-2')
+dynamoDB = boto3resource('dynamodb')
+dTable = dynamoDB.table('netball-ml-results')
+
 
 def load_graph(model_file):
     graph = tf.Graph()
@@ -214,16 +216,15 @@ for f in sorted(file_list):
                     tmp_Result = str(results[i])[0:5]
                     tmp_Model = str(args.ModelVersion)
 
-                    print("about to write to DynamoDB >70%")
+                    print("about to write to DynamoDB")
                     # write the details to a DynamoDB table in the cloud.
-                    response = dynamoDB.put_item(
-                        TableName='netball-ml-results',
+                    dTable.put_item(
                         Item={
                             'fileName': file_name,
-                            'label': tmp_Label,
-                            'probability': tmp_Result,
-                            'model': tmp_Model,
-                            'processed': "Y"
+                            'label': str(labels[i])[0:10],
+                            'probability': str(results[i])[0:5],
+                            'model': str(args.ModelVersion),
+                            'processed': str("Y")
                         }
                     )
 
