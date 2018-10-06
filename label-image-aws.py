@@ -212,9 +212,6 @@ for f in sorted(file_list):
                     log.writelines(str(datetime.datetime.now()) + " renaming and moving file " + "\r\n")
                     # the first loop contains the higest likelihood classification
                     new_file_name = ""
-                    tmp_Label = str(labels[i])[0:10]
-                    tmp_Result = str(results[i])[0:5]
-                    tmp_Model = str(args.ModelVersion)
 
                     print("about to write to DynamoDB")
                     # write the details to a DynamoDB table in the cloud.
