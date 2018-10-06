@@ -25,7 +25,7 @@ while True:
 
         print("about to write to DynamoDB")
         # write the details to a DynamoDB table in the cloud.
-        dTable.put_item(
+        table.put_item(
             Item={
                 'FileId': str(f),
                 'ProcessedDate': str(datetime.datetime.now()),
