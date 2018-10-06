@@ -6,6 +6,9 @@ s3 = boto3.resource('s3')
 
 bucket = s3.Bucket('netball-ml-processing')
 
+dynamoDB = boto3.resource('dyanmodb')
+table = dynamoDB.Table('netball-ml-results')
+
 #print(bucket.objects)
 
 #needs to be run with *** sudo ****  otherwise it won't work...
@@ -19,6 +22,22 @@ while True:
 
     for f in os.listdir(os.getcwd()):
         print("looping in file")
+
+        print("about to write to DynamoDB")
+        # write the details to a DynamoDB table in the cloud.
+        dTable.put_item(
+            Item={
+                'FileId': str(f),
+                'ProcessedDate': str(datetime.datetime.now()),
+                'label': "",
+                'probability': "",
+                'model': "",
+                'processed': str("N"),
+                'batch': str(sys.argv[1])
+            }
+        )
+
+        print("PutItem succeeded:")
 
         file_name, file_ext = os.path.splitext(f)
 
